@@ -15,7 +15,6 @@ import java.util.Scanner;
  * @author CCannon
  */
 public class PersonalTwitterFeed {
-    private static String tweeterName;
 
     private static int MAX_NUMBER_TWEETS = 200;
     
@@ -28,7 +27,7 @@ public class PersonalTwitterFeed {
         System.out.println("Welcome to your personal Twitter!");
         System.out.println("What's your name, tweeter?");
         
-        tweeterName = keyboard.nextLine();
+        String tweeterName = keyboard.nextLine();
         
         System.out.println("Nice to meet you " + tweeterName + "!");
         System.out.println("Enter your tweets and I will add them to your timeline!");
@@ -37,18 +36,19 @@ public class PersonalTwitterFeed {
         int numTweets = 0;
         
         while(numTweets < (MAX_NUMBER_TWEETS - 1)) {
-            newTweet(tweets, numTweets, keyboard);
-            numTweets++;
-            
-           
+            newTweet(tweets, numTweets, keyboard, tweeterName);
+            numTweets++;    
         }
         
         System.out.println("Your twitter feed is full");
     }
     
-    private static void newTweet(String[] tweets, int numTweets, Scanner keyboard){
+    private static void newTweet(String[] tweets, int numTweets, Scanner keyboard, String tweeterName){
+        if(numTweets < (MAX_NUMBER_TWEETS - 1) && numTweets != 0)
+                System.out.println("Enter your next tweet:");
         tweets[numTweets] = keyboard.nextLine() + " " + getTimeStamp();
-         System.out.println(tweeterName + "'s Personal Twitter Feed:");
+        
+            System.out.println(tweeterName + "'s Personal Twitter Feed:");
             for(int i = 0; i < numTweets; i++) {
                 System.out.println("- " + tweets[i]);
             }
@@ -57,9 +57,6 @@ public class PersonalTwitterFeed {
             System.out.println();
             System.out.println();
             System.out.println();
-            
-            if(numTweets < (MAX_NUMBER_TWEETS - 1))
-                System.out.println("Enter your next tweet:");
     }
     
     private static String getTimeStamp(){
